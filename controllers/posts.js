@@ -10,9 +10,18 @@ module.exports = {
       console.log(err);
     }
   },
+
+  //getFeed method as refenced in corresponding route in routes.main.js (Main routes)
   getFeed: async (req, res) => {
     try {
+
+      //MONGOOSE: .find() all posts in posts collection, .sort() them in descending order
+      //what is Post? It's our model. Look at models/Post to see the corresponding schema; createdAt is a property we gave to that Schema.
+  
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
+
+      //we take the array of posts and pass it to the ejs, where it will be called: posts
+
       res.render("feed.ejs", { posts: posts });
     } catch (err) {
       console.log(err);
@@ -20,6 +29,7 @@ module.exports = {
   },
   getPost: async (req, res) => {
     try {
+      // req.params.id references the :id route query parameter established in routes/posts.js
       const post = await Post.findById(req.params.id);
       res.render("post.ejs", { post: post, user: req.user });
     } catch (err) {
@@ -30,7 +40,7 @@ module.exports = {
     try {
       // Upload image to cloudinary
       const result = await cloudinary.uploader.upload(req.file.path);
-
+      console.log(result)
       await Post.create({
         title: req.body.title,
         image: result.secure_url,

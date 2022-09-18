@@ -3,10 +3,12 @@
   <div class="row mt-5">
       <div class="col-6">
           <div>
+            <!-- show the users username and email -->
               <p><strong>User Name</strong>: <%= user.userName %></p>
               <p><strong>Email</strong>: <%= user.email %></p>
               <a href="/logout" class="col-3 btn btn-primary">Logout</a>
           </div>
+          <!-- form to upload images -->
           <div class="mt-5">
             <h2>Add a post</h2>
             <form action="/post/createPost" enctype="multipart/form-data" method="POST">
