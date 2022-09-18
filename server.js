@@ -33,7 +33,7 @@ app.use(express.json());
 //Logging
 app.use(logger("dev"));
 
-//Use forms for put / delete
+//Use forms for put / delete - any request method that comes in, we'll check the _method query param of it, and it will tell us how to treat that request. They 
 app.use(methodOverride("_method"));
 
 // Setup Sessions - stored in MongoDB
